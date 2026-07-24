@@ -1,15 +1,16 @@
 #include <stdio.h>
+#include <unistd.h>
 
 static void printHostname(void)
 {
-  char hostname[500];
+  char hostname[256];
   if (gethostname(hostname, sizeof(hostname)) == 0)
   {
-    printf("hostname:", hostname);
+    printf("Hostname : %s\n", hostname);
   }
   else
   {
-    printf("error");
+    printf("Failed to retrieve hostname.\n");
   }
 }
 
