@@ -3,7 +3,12 @@
 
 static void printHostname(void)
 {
-  // Code to print hostname
+  char hostname[512];
+  if (gethostname(hostname, sizeof(hostname)) == 0) {
+    printf("Hostname: %s\n", hostname);
+  } else {
+    perror("gethostname");
+  }
 }
 
 static void printUser(void)
