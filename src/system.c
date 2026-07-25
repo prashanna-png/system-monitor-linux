@@ -1,14 +1,15 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <pwd.h>
+#include <sys/utsname.h>
 
+// terminal command = "hostname"
 static void printHostname(void)
 {
   char hostname[256];
   if (gethostname(hostname, sizeof(hostname)) == 0)
   {
-    // terminal command = "hostname"
-    printf("Hostname : %s\n", hostname);
+    printf("Hostname   : %s\n", hostname);
   }
   else
   {
@@ -16,18 +17,18 @@ static void printHostname(void)
   }
 }
 
+// terminal command = "whoami"
 static void printUser(void)
 {
-  // terminal command = "whoami"
   __uid_t uid = getuid();
 
-  printf("Userid: %d\n", uid);
+  printf("Userid     : %d\n", uid);
 
   struct passwd *pw = getpwuid(uid);
 
   if (pw != NULL)
   {
-    printf("Username : %s\n", pw->pw_name);
+    printf("Username   : %s\n", pw->pw_name);
   }
   else
   {
@@ -35,8 +36,18 @@ static void printUser(void)
   }
 }
 
+// terminal command: "name" or "name -r"
 static void printKernel(void)
 {
+  struct utsname uts;
+  if (uname(&uts) == 0)
+  {
+    printf("Kernel     : %s \n", uts.release);
+  }
+  else
+  {
+    printf("failed to retrieve kernel version");
+  }
 }
 
 static void printOS(void)
