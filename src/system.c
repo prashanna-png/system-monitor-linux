@@ -79,6 +79,7 @@ static void printOS(void)
       }
     }
   }
+  fclose(fp);
 }
 
 void printSystemInfo(void)
