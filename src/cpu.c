@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <sys/utsname.h>
 
 static void printModelName(void)
 {
@@ -18,7 +19,7 @@ static void printModelName(void)
     if (strncmp(target, modelName, 12) == 0)
     {
       char *start = strchr(modelName, ':');
-      printf("Model Name: %s", start+2);
+      printf("Model Name\t: %s", start + 2);
       break;
     }
   }
@@ -26,6 +27,11 @@ static void printModelName(void)
 
 static void printArchitecture(void)
 {
+  struct utsname uts;
+  if (uname(&uts) == 0)
+  {
+    printf("Architecture\t: %s\n", uts.machine);
+  }
 }
 
 static void printCoreCount(void)
