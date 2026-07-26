@@ -4,10 +4,9 @@
 
 static void printModelName(void)
 {
-  FILE *fp;
-  fp = fopen("/proc/cpuinfo", "r");
+  FILE *fp = fopen("/proc/cpuinfo", "r");
 
-  char modelName[200];
+  char line[200];
   char target[] = "model name	:";
   if (fp == NULL)
   {
@@ -15,11 +14,11 @@ static void printModelName(void)
     return;
   }
 
-  while (fgets(modelName, 200, fp))
+  while (fgets(line, 200, fp))
   {
-    if (strncmp(target, modelName, strlen(target)) == 0)
+    if (strncmp(target, line, strlen(target)) == 0)
     {
-      char *start = strchr(modelName, ':');
+      char *start = strchr(line, ':');
       printf("Model Name\t: %s", start + 2);
       break;
     }
@@ -38,10 +37,9 @@ static void printArchitecture(void)
 
 static void printCoreCount(void)
 {
-  FILE *fp;
-  fp = fopen("/proc/cpuinfo", "r");
+  FILE *fp = fopen("/proc/cpuinfo", "r");
 
-  char cpuCore[200];
+  char line[200];
   char target[] = "cpu cores	:";
   if (fp == NULL)
   {
@@ -49,11 +47,11 @@ static void printCoreCount(void)
     return;
   }
 
-  while (fgets(cpuCore, 200, fp))
+  while (fgets(line, 200, fp))
   {
-    if (strncmp(target, cpuCore, strlen(target)) == 0)
+    if (strncmp(target, line, strlen(target)) == 0)
     {
-      char *start = strchr(cpuCore, ':');
+      char *start = strchr(line, ':');
       printf("Cores\t\t: %s", start + 2);
       break;
     }
@@ -63,6 +61,26 @@ static void printCoreCount(void)
 
 static void printThreadCount(void)
 {
+  FILE *fp = fopen("/proc/cpuinfo", "r");
+
+  char line[200];
+  char target[] = "siblings	:";
+  if (fp == NULL)
+  {
+    printf("unable to open file\n");
+    return;
+  }
+
+  while (fgets(line, 200, fp))
+  {
+    if (strncmp(target, line, strlen(target)) == 0)
+    {
+      char *start = strchr(line, ':');
+      printf("threads\t\t: %s", start + 2);
+      break;
+    }
+  }
+  fclose(fp);
 }
 
 void printCPUInfo(void)

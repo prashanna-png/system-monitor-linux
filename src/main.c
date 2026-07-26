@@ -6,12 +6,12 @@ int main(void)
 {
   printf("==================================\n");
   printf("\tSystem Information\n");
-  printf("=================================\n");
+  printf("==================================\n");
   printSystemInfo();
 
   printf("==================================\n");
   printf("\tCPU Information\n");
-  printf("=================================\n");
+  printf("==================================\n");
   printCPUInfo();
 
   return 0;

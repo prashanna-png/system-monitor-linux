@@ -57,9 +57,7 @@ static void printKernel(void)
 // terminal command: "cat /etc/os-release"
 static void printOS(void)
 {
-  FILE *fp;
-
-  fp = fopen("/etc/os-release", "r");
+  FILE *fp = fopen("/etc/os-release", "r");
 
   char target[] = "PRETTY_NAME=";
 
@@ -69,13 +67,13 @@ static void printOS(void)
     return;
   }
 
-  char osVersion[200];
-  while (fgets(osVersion, 100, fp))
+  char line[200];
+  while (fgets(line, 100, fp))
   {
-    if (strncmp(target, osVersion, strlen(target)) == 0)
+    if (strncmp(target, line, strlen(target)) == 0)
     {
-      char *start = strchr(osVersion, '"');
-      char *end = strrchr(osVersion, '"');
+      char *start = strchr(line, '"');
+      char *end = strrchr(line, '"');
       if (start != NULL && end != NULL && start != end)
       {
         *end = '\0';
