@@ -15,6 +15,7 @@ static void printHostname(void)
   else
   {
     printf("Failed to retrieve hostname.\n");
+    return;
   }
 }
 
@@ -34,6 +35,7 @@ static void printUser(void)
   else
   {
     printf("failed to retrieve username");
+    return;
   }
 }
 
@@ -48,6 +50,7 @@ static void printKernel(void)
   else
   {
     printf("failed to retrieve kernel version");
+    return;
   }
 }
 
@@ -63,6 +66,7 @@ static void printOS(void)
   if (fp == NULL)
   {
     printf("Unable to open file");
+    return;
   }
 
   char osVersion[200];

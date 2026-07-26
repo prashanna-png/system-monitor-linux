@@ -11,7 +11,8 @@ static void printModelName(void)
   char target[] = "model name	:";
   if (fp == NULL)
   {
-    printf("unable to open file");
+    printf("unable to open file\n");
+    return;
   }
 
   while (fgets(modelName, 200, fp))
@@ -23,6 +24,7 @@ static void printModelName(void)
       break;
     }
   }
+  fclose(fp);
 }
 
 static void printArchitecture(void)
