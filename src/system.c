@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <pwd.h>
 #include <sys/utsname.h>
+#include <string.h>
 
 // terminal command = "hostname"
 static void printHostname(void)
@@ -50,8 +51,34 @@ static void printKernel(void)
   }
 }
 
+// terminal command: "cat /etc/os-release"
 static void printOS(void)
 {
+  FILE *fp;
+
+  fp = fopen("/etc/os-release", "r");
+  char osVersion[200];
+
+  char target[] = "PRETTY_NAME=";
+
+  if (fp == NULL)
+  {
+    printf("Unable to open file");
+  }
+  while (fgets(osVersion, 100, fp))
+  {
+    if (strncmp(target, osVersion, 12) == 0)
+    {
+      char *start = strchr(osVersion, '"');
+      char *end = strrchr(osVersion, '"');
+      if (start != NULL && end != NULL && start != end)
+      {
+        *end = '\0';
+        printf("OS         : %s\n", start + 1);
+        break;
+      }
+    }
+  }
 }
 
 void printSystemInfo(void)
