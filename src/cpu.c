@@ -17,7 +17,7 @@ static void printModelName(void)
 
   while (fgets(modelName, 200, fp))
   {
-    if (strncmp(target, modelName, 12) == 0)
+    if (strncmp(target, modelName, strlen(target)) == 0)
     {
       char *start = strchr(modelName, ':');
       printf("Model Name\t: %s", start + 2);
@@ -38,6 +38,27 @@ static void printArchitecture(void)
 
 static void printCoreCount(void)
 {
+  FILE *fp;
+  fp = fopen("/proc/cpuinfo", "r");
+
+  char cpuCore[200];
+  char target[] = "cpu cores	:";
+  if (fp == NULL)
+  {
+    printf("unable to open file\n");
+    return;
+  }
+
+  while (fgets(cpuCore, 200, fp))
+  {
+    if (strncmp(target, cpuCore, strlen(target)) == 0)
+    {
+      char *start = strchr(cpuCore, ':');
+      printf("Cores\t\t: %s", start + 2);
+      break;
+    }
+  }
+  fclose(fp);
 }
 
 static void printThreadCount(void)

@@ -72,7 +72,7 @@ static void printOS(void)
   char osVersion[200];
   while (fgets(osVersion, 100, fp))
   {
-    if (strncmp(target, osVersion, 12) == 0)
+    if (strncmp(target, osVersion, strlen(target)) == 0)
     {
       char *start = strchr(osVersion, '"');
       char *end = strrchr(osVersion, '"');
