@@ -1,0 +1,34 @@
+Summary:
+
+Create a module that displays basic system information by using Linux/POSIX system calls and reading a Linux system file.
+
+1. printHostname()
+   gethostname()
+   Character arrays (char hostname[256])
+   Checking return values (0 = success)
+
+2. printUser()
+   getuid()
+   User IDs (UID)
+   struct passwd
+   getpwuid()
+   Pointer (struct passwd \*pw)
+   -> operator
+
+3. printKernel()
+   struct utsname
+   uname()
+   Accessing structure members using .
+   Difference between . and ->
+
+4. printOS()
+   File handling
+   fopen()
+   fgets()
+   fclose()
+   Reading files line by line
+   while loop for unknown number of lines
+   strncmp() to compare the beginning of strings
+   strchr() and strrchr()
+   String parsing
+   Replacing the last " with '\0'
