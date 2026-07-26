@@ -1,4 +1,5 @@
 #include "system.h"
+#include "cpu.h"
 #include <stdio.h>
 
 int main(void)
@@ -7,5 +8,11 @@ int main(void)
   printf("\tSystem Information\n");
   printf("=================================\n");
   printSystemInfo();
+
+  printf("==================================\n");
+  printf("\tCPU Information\n");
+  printf("=================================\n");
+  printCPUInfo();
+
   return 0;
 }

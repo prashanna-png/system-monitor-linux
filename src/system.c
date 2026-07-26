@@ -57,7 +57,6 @@ static void printOS(void)
   FILE *fp;
 
   fp = fopen("/etc/os-release", "r");
-  char osVersion[200];
 
   char target[] = "PRETTY_NAME=";
 
@@ -65,6 +64,8 @@ static void printOS(void)
   {
     printf("Unable to open file");
   }
+
+  char osVersion[200];
   while (fgets(osVersion, 100, fp))
   {
     if (strncmp(target, osVersion, 12) == 0)
