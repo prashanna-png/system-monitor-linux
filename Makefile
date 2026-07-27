@@ -3,7 +3,8 @@ CC = gcc #compiler
 CFLAGS = -Wall -Wextra -Iinclude  #search header inside include folder
 
 SRC = src/main.c src/system.c \
-		src/cpu.c
+			src/cpu.c \
+			src/memory.c
  #source , and can add other sources as well
 
 TARGET = build/system-monitor 
