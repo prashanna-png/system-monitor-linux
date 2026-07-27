@@ -11,17 +11,17 @@ int main(void)
   printf("==================================\n");
   printSystemInfo();
 
-  printf("==================================\n");
+  printf("\n==================================\n");
   printf("\tCPU Information\n");
   printf("==================================\n");
   printCPUInfo();
 
-  printf("==================================\n");
+  printf("\n==================================\n");
   printf("\tMemory Information\n");
   printf("==================================\n");
   printMemoryInfo();
 
-  printf("==================================\n");
+  printf("\n==================================\n");
   printf("\tUp Time\n");
   printf("==================================\n");
   printUpTime();

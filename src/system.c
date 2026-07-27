@@ -10,7 +10,7 @@ static void printHostname(void)
   char hostname[256];
   if (gethostname(hostname, sizeof(hostname)) == 0)
   {
-    printf("Hostname   : %s\n", hostname);
+    printf("Hostname\t: %s\n", hostname);
   }
   else
   {
@@ -24,13 +24,13 @@ static void printUser(void)
 {
   __uid_t uid = getuid();
 
-  printf("Userid     : %d\n", uid);
+  printf("Userid\t\t: %d\n", uid);
 
   struct passwd *pw = getpwuid(uid);
 
   if (pw != NULL)
   {
-    printf("Username   : %s\n", pw->pw_name);
+    printf("Username\t: %s\n", pw->pw_name);
   }
   else
   {
@@ -45,7 +45,7 @@ static void printKernel(void)
   struct utsname uts;
   if (uname(&uts) == 0)
   {
-    printf("Kernel     : %s \n", uts.release);
+    printf("Kernel\t\t: %s \n", uts.release);
   }
   else
   {
@@ -77,7 +77,7 @@ static void printOS(void)
       if (start != NULL && end != NULL && start != end)
       {
         *end = '\0';
-        printf("OS         : %s\n", start + 1);
+        printf("OS\t\t: %s\n", start + 1);
         break;
       }
     }
