@@ -1,6 +1,7 @@
 #include "system.h"
 #include "cpu.h"
 #include "memory.h"
+#include "uptime.h"
 #include <stdio.h>
 
 int main(void)
@@ -19,6 +20,11 @@ int main(void)
   printf("\tMemory Information\n");
   printf("==================================\n");
   printMemoryInfo();
+
+  printf("==================================\n");
+  printf("\tUp Time\n");
+  printf("==================================\n");
+  printUpTime();
 
   return 0;
 }
