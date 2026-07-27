@@ -12,6 +12,9 @@ static void printMemoryStats(void)
   double availableGB;
   double usedMemory;
 
+  long totalMem = 0;
+  long totalAvailable = 0;
+
   if (fp == NULL)
   {
     printf("unable to open file\n");
@@ -21,18 +24,16 @@ static void printMemoryStats(void)
   {
     if (strncmp(target1, line, strlen(target1)) == 0)
     {
-      int totalMem;
       char *start = strrchr(line, ':');
-      sscanf(start + 1, "%d", &totalMem);
+      sscanf(start + 1, "%li", &totalMem);
 
       totalGB = totalMem / (1024.0 * 1024.0);
       printf("Total RAM\t: %.2f GB\n", totalGB);
     }
     if (strncmp(target2, line, strlen(target2)) == 0)
     {
-      int totalAvailable;
       char *start = strrchr(line, ':');
-      sscanf(start + 1, "%d", &totalAvailable);
+      sscanf(start + 1, "%li", &totalAvailable);
 
       availableGB = totalAvailable / (1024.0 * 1024.0);
       printf("Available\t: %.2f GB\n", availableGB);
