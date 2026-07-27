@@ -1,15 +1,15 @@
 #include <stdio.h>
 #include <math.h>
 
-static double uptimeSeconds = 0.0;
+double uptimeSeconds = 0.0;
 
 static void printTime(void)
 {
   FILE *fp = fopen("/proc/uptime", "r");
   char line[200];
-  int days;
-  int hours;
-  int minutes;
+  long days;
+  long hours;
+  long minutes;
 
   if (fp == NULL)
   {
@@ -33,7 +33,21 @@ static void printTime(void)
 
       seconds %= 60;
 
-      printf("Up time\t:%d Days %d hours %d minutes %ld seconds\n", days, hours, minutes, seconds);
+      if (days > 0)
+      {
+        printf("Uptime : %ld days %ld hours %ld minutes %ld seconds\n",
+               days, hours, minutes, seconds);
+      }
+      else if (hours > 0)
+      {
+        printf("Uptime : %ld hours %ld minutes %ld seconds\n",
+               hours, minutes, seconds);
+      }
+      else
+      {
+        printf("Uptime : %ld minutes %ld seconds\n",
+               minutes, seconds);
+      }
     }
     else
       printf("failed to parse uptime\n");
