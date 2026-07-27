@@ -5,7 +5,8 @@ CFLAGS = -Wall -Wextra -Iinclude  #search header inside include folder
 SRC = src/main.c src/system.c \
 			src/cpu.c \
 			src/memory.c \
-			src/uptime.c
+			src/uptime.c \
+			src/disk.c
  #source , and can add other sources as well
 
 TARGET = build/system-monitor 

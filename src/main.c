@@ -2,6 +2,7 @@
 #include "cpu.h"
 #include "memory.h"
 #include "uptime.h"
+#include "disk.h"
 #include <stdio.h>
 
 int main(void)
@@ -22,9 +23,14 @@ int main(void)
   printMemoryInfo();
 
   printf("\n==================================\n");
-  printf("\tUp Time\n");
+  printf("\t\tUp Time\n");
   printf("==================================\n");
   printUpTime();
+
+  printf("\n==================================\n");
+  printf("\tDisk Information\n");
+  printf("==================================\n");
+  printDiskInfo();
 
   return 0;
 }
