@@ -24,3 +24,17 @@ make
 ```bash
 make clean
 ```
+
+## Compatibility
+
+This project is designed for Linux systems and has been tested on Ubuntu 24.04 LTS.
+
+It uses standard Linux interfaces such as:
+
+- `/proc`
+- `/etc/os-release`
+- `statvfs()`
+- `uname()`
+- POSIX system calls
+
+Therefore, it should work on most modern Linux distributions with little or no modification.
