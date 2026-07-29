@@ -83,10 +83,36 @@ static void printThreadCount(void)
   fclose(fp);
 }
 
+static void calculateCPUUsage(void)
+{
+  char line[200];
+  char label[10];
+  long user, nice, system, idle, iowait, irq, softiq;
+
+  FILE *fp = fopen("/proc/stat", "r");
+
+  if (fp == NULL)
+  {
+    printf("Unable to open File\n");
+    return;
+  }
+
+  if (fgets(line, sizeof(line), fp))
+  {
+    sscanf(line, "%s %ld %ld %ld %ld %ld %ld %ld", label, &user, &nice, &system, &idle, &iowait, &irq, &softiq);
+    
+    printf("label: %s \n user: %ln\n nice: %ln\n system: %ln\nidle: %ln\niowait: %ln\nirq: %ln\nsoftiq: %ln\n", label, &user, &nice, &system, &idle, &iowait, &irq, &softiq);
+  }
+}
+
 void printCPUInfo(void)
 {
   printModelName();
   printArchitecture();
   printCoreCount();
   printThreadCount();
+}
+void printCPUUsage(void)
+{
+  calculateCPUUsage();
 }

@@ -38,5 +38,10 @@ int main(void)
   printf("==================================\n");
   printProcessInfo();
 
+  printf("\n==================================\n");
+  printf("\nCPU Usage\n");
+  printf("==================================\n");
+  printCPUUsage();
+
   return 0;
 }
