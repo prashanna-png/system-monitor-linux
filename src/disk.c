@@ -6,16 +6,27 @@ static void printDiskStats(void)
   struct statvfs disk;
   if (statvfs("/", &disk) == 0)
   {
-    printf("Total block\t\t:%ld\n", disk.f_blocks);
-    printf("Total block size\t:%ld\n", disk.f_frsize);
-    long int totalSize = disk.f_blocks * disk.f_frsize;
+    unsigned long long totalByte = disk.f_blocks * disk.f_frsize;
+    double totalGB = totalByte / (1024.0 * 1024.0 * 1024.0);
+    unsigned long long freeByte = disk.f_bavail * disk.f_frsize;
+    double freeGB = freeByte / (1024.0 * 1024.0 * 1024.0);
+    unsigned long long usedByte = totalByte - freeByte;
+    double usedGB = usedByte / (1024.0 * 1024.0 * 1024.0);
+    double usedPercentage =
+        (double)usedByte / totalByte * 100;
 
-    double totalGB = totalSize / (1024.0 * 1024.0 * 1024.0);
+    printf("Total Space\t\t: %.2f GB\n", totalGB);
 
-    printf("total size\t\t: %.2f GB\n", totalGB);
+    printf("Free Space\t\t: %.2f GB\n", freeGB);
+
+    printf("Used Space\t\t: %.2f GB\n", usedGB);
+
+    printf("Usage\t\t\t: %.2f%%\n", usedPercentage);
   }
   else
   {
+    printf("Failed to retrive Disk Information");
+    return;
   }
 }
 
