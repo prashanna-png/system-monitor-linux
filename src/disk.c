@@ -1,8 +1,11 @@
-#include <stdio.h>
-static void printDiskStats()
+#include<sys/statvfs.h>
+
+static void printDiskStats(void)
 {
-  printf("hello");
+  struct statvfs disk;
+  
 }
+
 void printDiskInfo(void)
 {
   printDiskStats();
