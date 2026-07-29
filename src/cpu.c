@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <sys/utsname.h>
+#include <unistd.h>
 
 static void printModelName(void)
 {
@@ -83,12 +84,12 @@ static void printThreadCount(void)
   fclose(fp);
 }
 
-static void calculateCPUUsage(void)
-{
-  char line[200];
-  char label[10];
-  long user, nice, system, idle, iowait, irq, softiq;
+char line[200];
+char label[10];
+long user, nice_val, system, idle, iowait, irq, softiq;
 
+static void readCPUStatus(void)
+{
   FILE *fp = fopen("/proc/stat", "r");
 
   if (fp == NULL)
@@ -99,10 +100,27 @@ static void calculateCPUUsage(void)
 
   if (fgets(line, sizeof(line), fp))
   {
-    sscanf(line, "%s %ld %ld %ld %ld %ld %ld %ld", label, &user, &nice, &system, &idle, &iowait, &irq, &softiq);
-    
-    printf("label: %s \n user: %ln\n nice: %ln\n system: %ln\nidle: %ln\niowait: %ln\nirq: %ln\nsoftiq: %ln\n", label, &user, &nice, &system, &idle, &iowait, &irq, &softiq);
+    int matched = sscanf(line, "%s %ld %ld %ld %ld %ld %ld %ld",
+                         label, &user, &nice_val, &system, &idle, &iowait, &irq, &softiq);
+
+    if (matched == 8)
+    {
+      printf("label: %s \n user: %ld\n nice: %ld\n system: %ld\n idle: %ld\n iowait: %ld\n irq: %ld\n softiq: %ld\n",
+             label, user, nice_val, system, idle, iowait, irq, softiq);
+    }
+    else
+    {
+      printf("Failed to parse CPU stats line\n");
+    }
   }
+  fclose(fp);
+}
+
+static void calculateCPUUsage(void)
+{
+  readCPUStatus();
+  sleep(1);
+  readCPUStatus();
 }
 
 void printCPUInfo(void)
