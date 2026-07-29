@@ -3,6 +3,7 @@
 #include "memory.h"
 #include "uptime.h"
 #include "disk.h"
+#include "process.h"
 #include <stdio.h>
 
 int main(void)
@@ -31,6 +32,11 @@ int main(void)
   printf("\tDisk Information\n");
   printf("==================================\n");
   printDiskInfo();
+
+  printf("\n==================================\n");
+  printf("\tDisk Information\n");
+  printf("==================================\n");
+  printProcessInfo();
 
   return 0;
 }
