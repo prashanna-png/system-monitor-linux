@@ -34,7 +34,7 @@ int main(void)
   printDiskInfo();
 
   printf("\n==================================\n");
-  printf("\tDisk Information\n");
+  printf("\tProcess Information\n");
   printf("==================================\n");
   printProcessInfo();
 
