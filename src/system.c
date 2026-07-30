@@ -24,8 +24,6 @@ static void printUser(void)
 {
   __uid_t uid = getuid();
 
-  printf("Userid\t\t: %d\n", uid);
-
   struct passwd *pw = getpwuid(uid);
 
   if (pw != NULL)
