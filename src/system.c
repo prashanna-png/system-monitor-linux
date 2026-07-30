@@ -39,7 +39,7 @@ static void printUser(void)
   }
 }
 
-// terminal command: "name" or "name -r"
+// terminal command: "uname" or "uname -r"
 static void printKernel(void)
 {
   struct utsname uts;

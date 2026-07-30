@@ -86,9 +86,13 @@ static void printThreadCount(void)
 
 char line[200];
 char label[10];
+long before_user, before_nice_val, before_system, before_idle, before_iowait, before_irq, before_softiq;
+
+long after_user, after_nice_val, after_system, after_idle, after_iowait, after_irq, after_softiq;
+
 long user, nice_val, system, idle, iowait, irq, softiq;
 
-static void readCPUStatus(void)
+static void readCPUStatus(int isFirst)
 {
   FILE *fp = fopen("/proc/stat", "r");
 
@@ -100,14 +104,30 @@ static void readCPUStatus(void)
 
   if (fgets(line, sizeof(line), fp))
   {
-    int matched = sscanf(line, "%s %ld %ld %ld %ld %ld %ld %ld",
-                         label, &user, &nice_val, &system, &idle, &iowait, &irq, &softiq);
+    sscanf(line, "%s %ld %ld %ld %ld %ld %ld %ld",
+           label, &user, &nice_val, &system, &idle, &iowait, &irq, &softiq);
 
-    if (matched == 8)
+    if (isFirst == 1)
     {
-      printf("label: %s \n user: %ld\n nice: %ld\n system: %ld\n idle: %ld\n iowait: %ld\n irq: %ld\n softiq: %ld\n",
-             label, user, nice_val, system, idle, iowait, irq, softiq);
+      before_user = user;
+      before_nice_val = nice_val;
+      before_system = system;
+      before_idle = idle;
+      before_iowait = iowait;
+      before_irq = irq;
+      before_softiq = softiq;
     }
+    else if (isFirst == 0)
+    {
+      after_user = user;
+      after_nice_val = nice_val;
+      after_system = system;
+      after_idle = idle;
+      after_iowait = iowait;
+      after_irq = irq;
+      after_softiq = softiq;
+    }
+
     else
     {
       printf("Failed to parse CPU stats line\n");
@@ -118,9 +138,22 @@ static void readCPUStatus(void)
 
 static void calculateCPUUsage(void)
 {
-  readCPUStatus();
+  readCPUStatus(1);
   sleep(1);
-  readCPUStatus();
+  readCPUStatus(0);
+
+  long totalBefore = before_user + before_nice_val + before_system + before_idle + before_iowait + before_irq + before_softiq;
+
+  long totalAfter = after_user + after_nice_val + after_system + after_idle + after_iowait + after_irq + after_softiq;
+
+  long idleBefore = before_idle + before_iowait;
+  long idleAfter = after_idle + after_iowait;
+
+  long totalDiff = totalAfter - totalBefore;
+  long idleDiff = idleAfter - idleBefore;
+
+  double cpu_usage = ((totalDiff - idleDiff) * 100.0) / totalDiff;
+  printf("CPU Usage: %.2f%%\n", cpu_usage);
 }
 
 void printCPUInfo(void)
