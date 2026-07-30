@@ -11,7 +11,7 @@ static void printModelName(void)
   char target[] = "model name	:";
   if (fp == NULL)
   {
-    printf("unable to open file\n");
+    printf("Unable to open file\n");
     return;
   }
 
@@ -44,7 +44,7 @@ static void printCoreCount(void)
   char target[] = "cpu cores	:";
   if (fp == NULL)
   {
-    printf("unable to open file\n");
+    printf("Unable to open file\n");
     return;
   }
 
@@ -68,7 +68,7 @@ static void printThreadCount(void)
   char target[] = "siblings	:";
   if (fp == NULL)
   {
-    printf("unable to open file\n");
+    printf("Unable to open file\n");
     return;
   }
 
@@ -86,11 +86,11 @@ static void printThreadCount(void)
 
 char line[200];
 char label[10];
-long before_user, before_nice_val, before_system, before_idle, before_iowait, before_irq, before_softiq;
+long before_user, before_nice_val, before_system, before_idle, before_iowait, before_irq, before_softirq;
 
-long after_user, after_nice_val, after_system, after_idle, after_iowait, after_irq, after_softiq;
+long after_user, after_nice_val, after_system, after_idle, after_iowait, after_irq, after_softirq;
 
-long user, nice_val, system, idle, iowait, irq, softiq;
+long user, nice_val, system, idle, iowait, irq, softirq;
 
 static void readCPUStatus(int isFirst)
 {
@@ -98,14 +98,14 @@ static void readCPUStatus(int isFirst)
 
   if (fp == NULL)
   {
-    printf("Unable to open File\n");
+    printf("Unable to open file\n");
     return;
   }
 
   if (fgets(line, sizeof(line), fp))
   {
-    sscanf(line, "%s %ld %ld %ld %ld %ld %ld %ld",
-           label, &user, &nice_val, &system, &idle, &iowait, &irq, &softiq);
+    sscanf(line, "%9s %ld %ld %ld %ld %ld %ld %ld",
+           label, &user, &nice_val, &system, &idle, &iowait, &irq, &softirq);
 
     if (isFirst == 1)
     {
@@ -115,7 +115,7 @@ static void readCPUStatus(int isFirst)
       before_idle = idle;
       before_iowait = iowait;
       before_irq = irq;
-      before_softiq = softiq;
+      before_softirq = softirq;
     }
     else if (isFirst == 0)
     {
@@ -125,7 +125,7 @@ static void readCPUStatus(int isFirst)
       after_idle = idle;
       after_iowait = iowait;
       after_irq = irq;
-      after_softiq = softiq;
+      after_softirq = softirq;
     }
 
     else
@@ -142,9 +142,9 @@ static void calculateCPUUsage(void)
   sleep(1);
   readCPUStatus(0);
 
-  long totalBefore = before_user + before_nice_val + before_system + before_idle + before_iowait + before_irq + before_softiq;
+  long totalBefore = before_user + before_nice_val + before_system + before_idle + before_iowait + before_irq + before_softirq;
 
-  long totalAfter = after_user + after_nice_val + after_system + after_idle + after_iowait + after_irq + after_softiq;
+  long totalAfter = after_user + after_nice_val + after_system + after_idle + after_iowait + after_irq + after_softirq;
 
   long idleBefore = before_idle + before_iowait;
   long idleAfter = after_idle + after_iowait;

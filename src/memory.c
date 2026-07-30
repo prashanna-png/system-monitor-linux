@@ -18,7 +18,7 @@ static void printMemoryStats(void)
 
   if (fp == NULL)
   {
-    printf("unable to open file\n");
+    printf("Unable to open file\n");
     return;
   }
   while (fgets(line, sizeof(line), fp))
@@ -46,10 +46,10 @@ static void printMemoryStats(void)
   fclose(fp);
 }
 
-static void calculateMemoryUsage()
+static void calculateMemoryUsage(void)
 {
   double memoryUsage = (usedMemory / totalGB) * 100;
-  printf("memory Usage: %.2f%%\n", memoryUsage);
+  printf("Memory Usage: %.2f%%\n", memoryUsage);
 }
 
 void printMemoryInfo(void)

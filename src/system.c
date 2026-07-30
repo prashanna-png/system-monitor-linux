@@ -34,7 +34,7 @@ static void printUser(void)
   }
   else
   {
-    printf("failed to retrieve username");
+    printf("Failed to retrieve username\n");
     return;
   }
 }
@@ -49,7 +49,7 @@ static void printKernel(void)
   }
   else
   {
-    printf("failed to retrieve kernel version");
+    printf("Failed to retrieve kernel version\n");
     return;
   }
 }
@@ -63,7 +63,7 @@ static void printOS(void)
 
   if (fp == NULL)
   {
-    printf("Unable to open file");
+    printf("Unable to open file\n");
     return;
   }
 

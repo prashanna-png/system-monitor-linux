@@ -44,7 +44,7 @@ int main(void)
   printCPUUsage();
 
   printf("\n==================================\n");
-  printf("\t memory Usage\n");
+  printf("\t Memory Usage\n");
   printf("==================================\n");
   printMemoryUsage();
 

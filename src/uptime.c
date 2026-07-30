@@ -13,7 +13,7 @@ static void printTime(void)
 
   if (fp == NULL)
   {
-    printf("unable to open file\n");
+    printf("Unable to open file\n");
     return;
   }
   if (fgets(line, sizeof(line), fp))
@@ -50,7 +50,7 @@ static void printTime(void)
       }
     }
     else
-      printf("failed to parse uptime\n");
+      printf("Failed to parse uptime\n");
   }
   fclose(fp);
 }

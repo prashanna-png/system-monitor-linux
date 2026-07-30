@@ -25,7 +25,7 @@ static void printDiskStats(void)
   }
   else
   {
-    printf("Failed to retrive Disk Information");
+    printf("Failed to retrieve Disk Information\n");
     return;
   }
 }

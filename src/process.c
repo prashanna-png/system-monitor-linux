@@ -10,6 +10,12 @@ static void printRunningProcesses(void)
 
   int processCount = 0;
 
+  if (dir == NULL)
+  {
+    printf("Unable to open /proc\n");
+    return;
+  }
+
   while ((entry = readdir(dir)) != NULL)
   {
     if (isdigit(entry->d_name[0]))
@@ -17,7 +23,7 @@ static void printRunningProcesses(void)
       processCount++;
     }
   }
-  printf("Running Processes\t:%d\n", processCount);
+  printf("Running Processes\t: %d\n", processCount);
 
   closedir(dir);
 }
