@@ -1,6 +1,9 @@
 #include <stdio.h>
 #include <string.h>
 
+double totalGB;
+double usedMemory;
+
 static void printMemoryStats(void)
 {
   FILE *fp = fopen("/proc/meminfo", "r");
@@ -8,9 +11,7 @@ static void printMemoryStats(void)
   char line[200];
   char target1[] = "MemTotal:";
   char target2[] = "MemAvailable:";
-  double totalGB;
   double availableGB;
-  double usedMemory;
 
   long totalMem = 0;
   long totalAvailable = 0;
@@ -45,7 +46,17 @@ static void printMemoryStats(void)
   fclose(fp);
 }
 
+static void calculateMemoryUsage()
+{
+  double memoryUsage = (usedMemory / totalGB) * 100;
+  printf("memory Usage: %.2f%%\n", memoryUsage);
+}
+
 void printMemoryInfo(void)
 {
   printMemoryStats();
+}
+void printMemoryUsage(void)
+{
+  calculateMemoryUsage();
 }
