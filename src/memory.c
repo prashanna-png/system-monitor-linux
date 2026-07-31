@@ -49,7 +49,7 @@ static void printMemoryStats(void)
 static void calculateMemoryUsage(void)
 {
   double memoryUsage = (usedMemory / totalGB) * 100;
-  printf("Memory Usage: %.2f%%\n", memoryUsage);
+  printf("Memory Usage\t\t: %.2f%%\n", memoryUsage);
 }
 
 void printMemoryInfo(void)

@@ -15,13 +15,13 @@ static void printDiskStats(void)
     double usedPercentage =
         (double)usedByte / totalByte * 100;
 
-    printf("Total Space\t\t: %.2f GB\n", totalGB);
+    printf("Total Space\t: %.2f GB\n", totalGB);
 
-    printf("Free Space\t\t: %.2f GB\n", freeGB);
+    printf("Free Space\t: %.2f GB\n", freeGB);
 
-    printf("Used Space\t\t: %.2f GB\n", usedGB);
+    printf("Used Space\t: %.2f GB\n", usedGB);
 
-    printf("Usage\t\t\t: %.2f%%\n", usedPercentage);
+    printf("Usage\t\t: %.2f%%\n", usedPercentage);
   }
   else
   {

@@ -35,17 +35,17 @@ static void printTime(void)
 
       if (days > 0)
       {
-        printf("Uptime : %ld days %ld hours %ld minutes %ld seconds\n",
+        printf("Uptime \t: %ld days %ld hours %ld minutes %ld seconds\n",
                days, hours, minutes, seconds);
       }
       else if (hours > 0)
       {
-        printf("Uptime : %ld hours %ld minutes %ld seconds\n",
+        printf("Uptime \t: %ld hours %ld minutes %ld seconds\n",
                hours, minutes, seconds);
       }
       else
       {
-        printf("Uptime : %ld minutes %ld seconds\n",
+        printf("Uptime \t\t: %ld minutes %ld seconds\n",
                minutes, seconds);
       }
     }

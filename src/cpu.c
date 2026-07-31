@@ -153,7 +153,7 @@ static void calculateCPUUsage(void)
   long idleDiff = idleAfter - idleBefore;
 
   double cpu_usage = ((totalDiff - idleDiff) * 100.0) / totalDiff;
-  printf("CPU Usage: %.2f%%\n", cpu_usage);
+  printf("CPU Usage\t\t: %.2f%%\n", cpu_usage);
 }
 
 void printCPUInfo(void)
